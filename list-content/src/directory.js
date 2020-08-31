@@ -23,26 +23,31 @@ const LS_DIR = (S_DIR) => {
     const S_SEARCH = { index: 1, count: -1 };
     const S_DB = [];
     if (S_STATUS) {
-        fs.readdirSync(path.join(S_DIR)).forEach((nm, id, ar) => {
-            (S_SEARCH.count == -1) ? S_SEARCH.count = ar.length : false;
-            const file_get_type = (fs.statSync(path.join(S_DIR, nm)).isDirectory()) ? "folder" : "file";
-            const OR_NAME = path.basename(S_DIR);
-            const FO_KEY = String(path.normalize(S_DIR)).replace(path.normalize(ORIGIN_LS), ".");
-            if (file_get_type == "folder") {
-                R_DB.push({ dir: FO_KEY.concat("\\").concat(nm), name: nm });
-                S_DB.push(nm);
-                ISRUN = true;
-            }
-            else if (file_get_type == "file") {
-                G_DB.push({ dir: FO_KEY, name: nm });
-            }
-            if (S_SEARCH.count === S_SEARCH.index) {
-                SUB_LS(S_DIR, S_DB);
-            }
-            else {
-                S_SEARCH.index++;
-            }
-        });
+        try {
+            fs.readdirSync(path.join(S_DIR)).forEach((nm, id, ar) => {
+                (S_SEARCH.count == -1) ? S_SEARCH.count = ar.length : false;
+                const file_get_type = (fs.statSync(path.join(S_DIR, nm)).isDirectory()) ? "folder" : "file";
+                const OR_NAME = path.basename(S_DIR);
+                const FO_KEY = String(path.normalize(S_DIR)).replace(path.normalize(ORIGIN_LS), ".");
+                if (file_get_type == "folder") {
+                    R_DB.push({ dir: FO_KEY.concat("\\").concat(nm), name: nm });
+                    S_DB.push(nm);
+                    ISRUN = true;
+                }
+                else if (file_get_type == "file") {
+                    G_DB.push({ dir: FO_KEY, name: nm });
+                }
+                if (S_SEARCH.count === S_SEARCH.index) {
+                    SUB_LS(S_DIR, S_DB);
+                }
+                else {
+                    S_SEARCH.index++;
+                }
+            });
+        }
+        catch (error) {
+            return error;
+        }
     }
     ISRUN = false;
 };

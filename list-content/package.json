@@ -1,14 +1,19 @@
 {
   "name": "list-content",
-  "version": "1.1.0",
+  "version": "1.0.15",
   "description": "Files & Directory Listing",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "dir",
+    "List files in a directory",
+    "list folder",
+    "list files"
+  ],
   "author": "leo zacharry",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "util": "^0.12.3"
   }
